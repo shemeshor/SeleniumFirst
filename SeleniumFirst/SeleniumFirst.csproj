@@ -3,11 +3,38 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <StartupObject>SeleniumFirst.Program</StartupObject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha04" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version=" 80.0.3987.132 (Official Build) (64-bit)" />
+   
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.0-preview-20200310-03" />
+   
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="16.6.0-preview-20200310-03" />
+   
+    <PackageReference Include="NUnit" Version="3.12.0" />
+   
+    <PackageReference Include="NUnit.Runners" Version="3.11.1" />
+   
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+   
+    <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha03" />
+   
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="80.0.3987.10600" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="del /F /Q &quot;$(IntDir)\$(MSBuildProjectName).lastbuildstate&quot;" />
+  </Target>
 
 </Project>
